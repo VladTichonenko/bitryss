@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Загрузка сайта</title>
+    <style>
+        /* Основные стили для всего экрана загрузки */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-color: #222326;
+            overflow: hidden;
+        }
+
+        /* Стиль для экрана загрузки */
+        #loading-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 100vw;
+            position: absolute;
+            background-color: #222326;
+            z-index: 9999;
+        }
+
+        /* Анимация для пульсирующей картинки */
+        .pulse {
+            width: 180px;
+            height: 180px;
+            background-image: url('BiTry.jpg'); /* Замените ссылку на свою картинку */
+            background-size: cover;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.07);
+            }
+        }
+
+        /* Прогресс-бар */
+        .progress-bar {
+            width: 80%;
+            height: 10px;
+            background-color: #5a5a5a;
+            margin-top: 20px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            width: 0;
+            height: 100%;
+            background-color: rgb(221, 115, 1);
+            border-radius: 5px;
+        }
+
+        /* Подпись внизу */
+        .by-text {
+            position: absolute;
+            bottom: 20px;
+            font-size: 20px;
+            color: #985600;
+            font-weight: bold;
+        }
+
+        /* Стиль основной страницы */
+        #main-content {
+            display: none;
+            width: 100%;
+            text-align: center;
+            color: #ffffff;
+            position: relative;
+            padding-top: 100px; /* Чтобы кнопки не перекрывались заголовком */
+        }
+
+        /* Стиль заголовка и логотипа */
+        .header {
+            position: absolute;
+            top: 1px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            color: #df602a;
+        }
+
+        /* Стиль кнопок */
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .button {
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 25px;
+            background-color: #424242; /* Цвет фона кнопок */
+            color: #df602a; /* Оранжевый текст кнопок */
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            border: 2px solid #df602a; /* Оранжевая рамка */
+            width: 260px;
+        }
+
+        .button:hover {
+            background-color: #cc7a00;
+        }
+
+        /* Стиль блока связи с менеджером */
+        .contact-box {
+            background-color: #424242; /* Фон блока */
+            border: 2px solid #df602a; /* Оранжевая рамка */
+            border-radius: 10px;
+            width: 220px; /* Сделаем блок немного уже */
+            padding: 20px;
+            text-align: center;
+            color: #df602a; /* Оранжевый текст */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 30px; /* Отступ сверху */
+        }
+
+        /* Стиль заголовка в блоке */
+        .contact-box .title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #df602a;
+            margin-bottom: 10px;
+        }
+
+        /* Стиль имени */
+        .contact-box .name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #df602a;
+            margin-bottom: 5px;
+        }
+
+        /* Стиль текста описания */
+        .contact-box .description {
+            font-size: 14px;
+            color: #df602a;
+            margin-bottom: 15px;
+        }
+
+        /* Стиль кнопки в блоке */
+        .contact-box .send-message {
+            font-size: 14px;
+            font-weight: bold;
+            color: #df602a;
+            padding: 10px 20px;
+            border: 2px solid #df602a;
+            border-radius: 5px;
+            background-color: transparent;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            text-decoration: none;
+        }
+
+        .contact-box .send-message:hover {
+            background-color: #df602a;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Экран загрузки -->
+    <div id="loading-screen">
+        <div class="pulse"></div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <div class="by-text">by BiTry</div>
+    </div>
+
+    <!-- Основная страница -->
+    <div id="main-content">
+        <div class="header">
+            <img src="BiTry.jpg" alt="BiTry logo"> <!-- Путь к вашей картинке -->
+            <h1>BiTry-Studio</h1>
+        </div>
+        <div class="button-container">
+            <button class="button" onclick="window.open('https://t.me/ITtbcstudio/3', '_blank')">Наше портфолио</button>
+            <button class="button" onclick="window.open('https://t.me/ITtbcstudio/15', '_blank')">О нас</button>
+            <button class="button" onclick="window.open('https://t.me/ITtbcstudio/56', '_blank')">Наши соц-сети</button>
+        </div>
+
+        <!-- Блок "Связь с менеджером" -->
+        <div class="contact-box">
+            <div class="title">Связь с менеджером</div>
+            <div class="name">Ilya</div>
+            <div class="description">Готов ответить в любое время<a href="https://t.me/Ilyadjru" target="_blank"></a></div>
+            <br>
+            <a href="https://t.me/Ilyadjru" target="_blank" class="send-message">SEND MESSAGE</a>
+        </div>
+    </div>
+
+    <script>
+        // Функция обновления прогресс-бара и завершения загрузки
+        let progress = 0;
+        const progressFill = document.getElementById('progress-fill');
+        const loadingScreen = document.getElementById('loading-screen');
+        const mainContent = document.getElementById('main-content');
+
+        const interval = setInterval(() => {
+            progress += 2;
+            progressFill.style.width = progress + '%';
+
+            if (progress >= 100) {
+                clearInterval(interval);
+                loadingScreen.style.display = 'none';
+                mainContent.style.display = 'flex';
+                mainContent.style.flexDirection = 'column';
+                mainContent.style.alignItems = 'center';
+            }
+        }, 100);
+    </script>
+
+</body>
+</html>
